@@ -5,28 +5,43 @@ var knex = require('knex')({
     },
 });
 
+// var data = {
+//     name: 'Khichidi Kadhi',
+//     steps: [
+//         'Cook rice and lentils',
+//         'Thicken yogurt with gram flour, cooking over a low heat',
+//         'Add tadka to yogurt'
+//     ],
+//     tags: ['curry', 'vegetarian']
+// };
 knex.insert({
     name: 'Khichidi Kadhi',
     description: 'Rice and lentils with a yoghurt gravy'
 }).into('recipes').then();
 
-knex.select('name', 'description').from('recipes').then(function(recipes) {
-    console.log('ALL OF LE RECIPES',recipes);
-});
+knex.insert({
+    steps: 'Cook rice and lentils'
+}).into('steps').then();
 
-knex.select('description').from('recipes').where({
-    name: 'Khichidi Kadhi'
-}).then(function(recipes){
-    console.log('THIS IS THE RECIPE',recipes[0]);
-});
+knex.insert({
+    steps: 'Thicken yogurt with gram flour, cooking over a low heat'
+}).into('steps').then();
 
-// Update one of the recipes
-knex('recipes').update({
-    description: 'Scrumptious rice and lentils with a yoghurt gravy'
-}).where({
-    name: 'Khichidi Kadhi'
-}).then();
+knex.insert({
+    steps: 'Add tadka to yogurt'
+}).into('steps').then();
 
-knex.del().from('recipes').where({
-    name: 'Khichidi Kadhi'
-}).then();
+knex.insert({
+    name: 'curry'
+}).into('tags').then();
+
+knex.insert({
+    name: 'vegetarian'
+}).into('tags').then();
+
+// knex.select('recipes.name', 'steps.description')
+//     .from('recipes')
+//     .join('steps', steps.recipe_id, recipe.id)
+//     .then(function(rows){
+//         console.log(rows);
+//     });
